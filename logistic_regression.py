@@ -1,5 +1,5 @@
 import numpy as np
-import pandas
+import pandas as pd
 
 class LogisticRegression():
     
@@ -12,7 +12,7 @@ class LogisticRegression():
 
         pass
         
-    def fit(self, x: pandas.DataFrame, y: pandas.Series):
+    def fit(self, x: pd.DataFrame, y: pd.Series):
         self.weights = np.zeros(x.shape[1])
         self.bias = 0
 
@@ -54,13 +54,11 @@ class LogisticRegression():
     def accuracy(self, true_values, predictions):
         return np.mean(true_values == predictions)
     
-    def predict(self, x: pandas.DataFrame):
+    def predict(self, x: pd.DataFrame):
         lin_model = np.dot(x, self.weights) + self.bias
         y_pred = self.sigmoid(lin_model)
         return [1 if _y >= 0.5 else 0 for _y in y_pred]
 
-    def predict_proba(self, x: pandas.DataFrame):
+    def predict_proba(self, x: pd.DataFrame):
         lin_model = np.dot(x, self.weights) + self.bias
         return self.sigmoid(lin_model)
-
-        
